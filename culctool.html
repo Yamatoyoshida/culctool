@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="./css/reset.css">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+
+<body id="body">
+
+	<div id="wrap">
+		<h2>食品の単価計算ツール</h2>
+		<div id="resultSec">
+			<!--計算結果表示フィールド-->
+			<h3>計算結果表示フィールド</h3>
+			<table class="tbl">
+				<tr>
+					<!--ヘッダ-->
+					<th></th>
+					<th>歩留</th>
+					<th>原料評価(円)</th>
+					<th>原料単価(円/kg)</th>
+				</tr>
+				<tr>
+					<!--1行目-->
+					<td>求めたい可食部材</td>
+					<td><input type="text" name="ratioOfTarget" id="idRatioOfTarget" size="5" maxlength="5" step="0.001" placeholder=""
+						 disabled="disabled" />%</td>
+					<td><input type="text" name="valueOfTarget" id="idValueOfTarget" size="14" maxlength="14" placeholder="" disabled="disabled" />円</td>
+					<td><input type="number" name="valurOfTargetPerKG" id="idValurOfTargetPerKG" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+				<tr>
+					<!--2行目-->
+					<td>他可食部位合計</td>
+					<td><input type="text" name="sumofRatioOfItems" id="idSumofRatioOfItems" size="8" maxlength="8" step="0.001"
+						 placeholder="" disabled="disabled" />%</td>
+					<td><input type="text" name="sumOfValueOfItems" id="idSumOfValueOfItems" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円</td>
+				</tr>
+			</table>
+		</div>
+		<div id="materialsSec">
+			<!--原料単価入力フィールド(セクション00)-->
+			<h3>原料単価入力フィールド</h3>
+			<table class="tbl" id="materials">
+				<tr>
+					<th>原料名称</th>
+					<th>可食比率</th>
+					<th>原料単価(円/kg)</th>
+					<th>可食部位単価</th>
+				</tr>
+				<tr>
+					<!--1行目-->
+					<td><input type="text" name="nameOfMaterial" id="id000001" size="18" maxlength="20" placeholder="原料" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfMaterial" id="id000101" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" title="加工前原料から取り出した可食部位の割合(%)" />%</td>
+					<td><input type="number" name="valueOfMaterial" id="id000201" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" title="加工前原料の仕入単価(円)" />円</td>
+					<td><input type="number" name="valurOfMaterialPerKG" id="id000301" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+
+				</tr>
+				<tr>
+					<!--2行目-->
+					<td><input type="text" name="nameOfMaterial" id="id000002" size="18" maxlength="20" placeholder="原料" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfMaterial" id="id000102" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfMaterial" id="id000202" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfMaterialPerKG" id="id000302" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+				<tr>
+					<!--3行目-->
+					<td><input type="text" name="nameOfMaterial" id="id000003" size="18" maxlength="20" placeholder="原料" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfMaterial" id="id000103" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfMaterial" id="id000203" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfMaterialPerKG" id="id000303" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+				<tr>
+					<!--4行目-->
+					<td><input type="text" name="nameOfMaterial" id="id000004" size="18" maxlength="20" placeholder="原料" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfMaterial" id="id000104" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfMaterial" id="id000204" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfMaterialPerKG" id="id000304" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+				<tr>
+					<!--5行目-->
+					<td><input type="text" name="nameOfMaterial" id="id000005" size="18" maxlength="20" placeholder="原料" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfMaterial" id="id000105" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfMaterial" id="id000205" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfMaterialPerKG" id="id000305" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+				<tr>
+					<!--6行目-->
+					<td><input type="text" name="nameOfMaterial" id="id000006" size="18" maxlength="20" placeholder="原料" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfMaterial" id="id000106" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfMaterial" id="id000206" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfMaterialPerKG" id="id000306" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+				<tr>
+					<!--7行目-->
+					<td><input type="text" name="nameOfMaterial" id="id000007" size="18" maxlength="20" placeholder="原料" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfMaterial" id="id000107" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfMaterial" id="id000207" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfMaterialPerKG" id="id000307" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+			</table>
+			<!--原料行追加ボタン-->
+			<button type="button" onclick="addMatelialRow();">行追加</button>
+
+			<table class="tbl">
+				<!--原料単価平均-->
+				<tr>
+					<td>原料平均値</td>
+					<td><input type="" name="ratioOfMaterial" id="aveOfMateRatio" size="8" maxlength="8" step="0.001" placeholder=""
+						 disabled="disabled" />%</td>
+					<td><input type="" name="valueOfMaterial" id="aveOfMateValue" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+					<td><input type="" name="valurOfMaterialPerKG" id="aveOfItemValue" size="14" maxlength="14" placeholder=""
+						 disabled="disabled" />円/kg</td>
+				</tr>
+
+			</table>
+
+		</div>
+		<div id="productsSec">
+			<h3>製品単価入力フィールド</h3>
+			<table class="tbl" id="products">
+				<tr>
+					<th>品名</th>
+					<th>歩留</th>
+					<th>原料単価(円/kg)</th>
+					<th>原料評価(円)</th>
+				</tr>
+				<tr id = "product1">
+					<!--1行目-->
+					<td><input type="text" name="nameOfItem" id="id010001" size="18" maxlength="20" placeholder="可食部位" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfItem" id="id010101" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" title="原料加工後の可食部から取り出した各部位の割合(%)" />%</td>
+					<td><input type="number" name="valueOfItemPerKG" id="id010201" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" title="添加物などを含まない原料単価(円)" />円</td>
+					<td><input type="number" name="valurOfItem" id="id010301" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+					<!--<td><button type="button" onclick="additiveOpen('id0101')">添加物</button></td>-->
+
+				</tr>
+				<tr id = "product2">
+					<!--2行目-->
+					<td><input type="text" name="nameOfItem" id="id010002" size="18" maxlength="20" placeholder="可食部位" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfItem" id="id010102" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfItemPerKG" id="id010202" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfItem" id="id010302" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+				</tr>
+				<tr id = "product3">
+					<!--3行目-->
+					<td><input type="text" name="nameOfItem" id="id010003" size="18" maxlength="20" placeholder="可食部位" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfItem" id="id010103" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfItemPerKG" id="id010203" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfItem" id="id010303" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+				</tr>
+				<tr id = "product4">
+					<!--4行目-->
+					<td><input type="text" name="nameOfItem" id="id010004" size="18" maxlength="20" placeholder="可食部位" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfItem" id="id010104" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfItemPerKG" id="id010204" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfItem" id="id010304" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+				</tr>
+				<tr id = "product5">
+					<!--5行目-->
+					<td><input type="text" name="nameOfItem" id="id010005" size="18" maxlength="20" placeholder="可食部位" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfItem" id="id010105" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfItemPerKG" id="id010205" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfItem" id="id010305" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+				</tr>
+				<tr id = "product6">
+					<!--6行目-->
+					<td><input type="text" name="nameOfItem" id="id010006" size="18" maxlength="20" placeholder="可食部位" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfItem" id="id010106" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfItemPerKG" id="id010206" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfItem" id="id010306" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+				</tr>
+				<tr id = "product7">
+					<!--7行目-->
+					<td><input type="text" name="nameOfItem" id="id010007" size="18" maxlength="20" placeholder="可食部位" title="名称を入力して下さい" /></td>
+					<td><input type="number" name="ratioOfItem" id="id010107" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" oninput="culc();" />%</td>
+					<td><input type="number" name="valueOfItemPerKG" id="id010207" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" oninput="culc();" />円</td>
+					<td><input type="number" name="valurOfItem" id="id010307" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+				</tr>
+
+			</table>
+			<!--製品行追加ボタン-->
+			<button type="button" onclick="addItemRow(1);">行追加</button>
+
+			<table class="tbl">
+				<tr>
+					<!--8行目-->
+					<td>合計</td>
+					<td><input type="number" name="sumOfItemRatio" id="sumOfItemRatio" size="8" maxlength="8" step="0.001" min="0" max="100"
+						 placeholder="00.000" disabled="disabled" />%</td>
+					<td><input type="number" name="sumOfItemvaluePerKG" id="sumOfItemvaluePerKG" size="14" maxlength="14" step="0.01" min="0"
+						 placeholder="000.000" disabled="disabled" />円</td>
+					<td><input type="number" name="sumOfItemValue" id="sumOfItemValue" size="14" maxlength="14" placeholder="" disabled="disabled" />円/kg</td>
+				</tr>
+			</table>
+
+			<button type="button" onclick="clearInput();">クリア</button>
+			<button type="button" class = "btn">ダウンロード</button>
+			<a style="display:none;" id="downloader" href="#"></a>
+		</div>
+
+		<script src="./jquery-3.3.1.min.js"></script>
+		<script src="./culctool.js"></script>
+</body>
+</html>
